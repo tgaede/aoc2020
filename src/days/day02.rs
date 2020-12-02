@@ -1,4 +1,10 @@
 use crate::common::Solution;
+use lazy_static::lazy_static;
+use regex::Regex;
+
+lazy_static! {
+    static ref REG: Regex = Regex::new(r"^(\d+)-(\d+)\s+(\w+):\s+(\w+)").unwrap();
+}
 
 #[derive(Clone, Debug)]
 struct Password {
@@ -28,61 +34,38 @@ pub fn solve(lines: &[String]) -> Solution {
 
 fn parse_password(s: &String) -> Password {
     let mut p: Password = Password::new();
-    let mut line_iter = s.split_whitespace();
 
-    let minmax_string = line_iter.next().unwrap().to_string();
-    let mut minmax_iter = minmax_string.split('-');
-    p.min = minmax_iter
-        .next()
-        .unwrap()
-        .to_string()
-        .parse::<u32>()
-        .unwrap();
-    p.max = minmax_iter
-        .next()
-        .unwrap()
-        .to_string()
-        .parse::<u32>()
-        .unwrap();
-    p.c = line_iter
-        .next()
-        .unwrap()
-        .to_string()
-        .chars()
-        .next()
-        .unwrap();
-    p.password = line_iter.next().unwrap().to_string();
+    let matches = REG.captures(s.as_str()).unwrap();
+    p.min = matches.get(1).unwrap().as_str().parse::<u32>().unwrap();
+    p.max = matches.get(2).unwrap().as_str().parse::<u32>().unwrap();
+    p.c = matches.get(3).unwrap().as_str().parse::<char>().unwrap();
+    p.password = String::from(matches.get(4).unwrap().as_str());
 
     p
 }
 
-fn is_password_valid_part1(p: &Password) -> bool {
-    let count: u32 = p.password.chars().filter(|x| *x == p.c).count() as u32;
-
-    count >= p.min && count <= p.max
-}
-
 fn solve_part1(lines: &[String]) -> String {
-    return lines
+    lines
         .iter()
         .map(|x| parse_password(x))
-        .filter(|x| is_password_valid_part1(x))
+        .filter(|p| {
+            let count: u32 = p.password.chars().filter(|x| *x == p.c).count() as u32;
+            count >= p.min && count <= p.max
+        })
         .count()
-        .to_string();
-}
-
-fn is_password_valid_part2(p: &Password) -> bool {
-    let mut result: bool = p.password.chars().nth((p.min - 1) as usize).unwrap() == p.c;
-    result ^= p.password.chars().nth((p.max - 1) as usize).unwrap() == p.c;
-
-    result
+        .to_string()
 }
 
 fn solve_part2(lines: &[String]) -> String {
-    return lines
+    lines
         .iter()
         .map(|x| parse_password(x))
-        .filter(|x| is_password_valid_part2(x))
+        .filter(|p| {
+            let mut result: bool = p.password.chars().nth((p.min - 1) as usize).unwrap() == p.c;
+            result ^= p.password.chars().nth((p.max - 1) as usize).unwrap() == p.c;
+
+            result
+        })
         .count()
-        .to_string();
+        .to_string()
 }
