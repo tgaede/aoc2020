@@ -8,10 +8,19 @@ pub fn solve(lines: &[String]) -> Solution {
 }
 
 fn solve_part1(lines: &[String]) -> String {
-    count_trees(lines, 3, 1)
+    count_trees(lines, 3, 1).to_string()
 }
 
-fn count_trees(lines: &[String], right: usize, down: usize) -> String {
+fn solve_part2(lines: &[String]) -> String {
+    (count_trees(lines, 1, 1)
+        * count_trees(lines, 3, 1)
+        * count_trees(lines, 5, 1)
+        * count_trees(lines, 7, 1)
+        * count_trees(lines, 1, 2))
+    .to_string()
+}
+
+fn count_trees(lines: &[String], right: usize, down: usize) -> usize {
     let mut right_index: usize = 0;
     let mut down_index: usize = 0;
 
@@ -25,14 +34,4 @@ fn count_trees(lines: &[String], right: usize, down: usize) -> String {
             result
         })
         .count()
-        .to_string()
-}
-
-fn solve_part2(lines: &[String]) -> String {
-    (count_trees(lines, 1, 1).parse::<usize>().unwrap()
-        * count_trees(lines, 3, 1).parse::<usize>().unwrap()
-        * count_trees(lines, 5, 1).parse::<usize>().unwrap()
-        * count_trees(lines, 7, 1).parse::<usize>().unwrap()
-        * count_trees(lines, 1, 2).parse::<usize>().unwrap())
-    .to_string()
 }
