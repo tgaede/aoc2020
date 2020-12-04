@@ -1,38 +1,46 @@
-use crate::common::Solution;
-
-pub fn solve(lines: &[String]) -> Solution {
-    let part1: String = solve_part1(lines);
-    let part2: String = solve_part2(lines);
-
-    (part1, part2)
+pub fn solve(input: &str) {
+    solve_part1(input);
+    solve_part2(input);
 }
 
-fn solve_part1(lines: &[String]) -> String {
-    let mut numbers: Vec<u32> = lines.iter().map(|x| x.parse::<u32>().unwrap()).collect();
+fn solve_part1(input: &str) {
+    let mut numbers: Vec<u32> = input
+        .split("\n")
+        .map(|x| x.parse::<u32>().unwrap())
+        .collect();
     numbers.sort();
 
-    for x in 0..numbers.len() {
+    let mut result: u32 = 0;
+
+    'outer: for x in 0..numbers.len() {
         for y in (x + 1)..numbers.len() {
             if (numbers[x] + numbers[y]) == 2020 {
-                return (numbers[x] * numbers[y]).to_string();
+                result = numbers[x] * numbers[y];
+                break 'outer;
             } else if (numbers[x] + numbers[y]) > 2020 {
                 break;
             }
         }
     }
 
-    unreachable!();
+    println!("part 1: {}", result);
 }
 
-fn solve_part2(lines: &[String]) -> String {
-    let mut numbers: Vec<u32> = lines.iter().map(|x| x.parse::<u32>().unwrap()).collect();
+fn solve_part2(input: &str) {
+    let mut numbers: Vec<u32> = input
+        .split("\n")
+        .map(|x| x.parse::<u32>().unwrap())
+        .collect();
     numbers.sort();
 
-    for x in 0..numbers.len() {
+    let mut result: u32 = 0;
+
+    'outer: for x in 0..numbers.len() {
         for y in (x + 1)..numbers.len() {
             for z in (y + 1)..numbers.len() {
                 if (numbers[x] + numbers[y] + numbers[z]) == 2020 {
-                    return (numbers[x] * numbers[y] * numbers[z]).to_string();
+                    result = numbers[x] * numbers[y] * numbers[z];
+                    break 'outer;
                 } else if (numbers[x] + numbers[y] + numbers[z]) > 2020 {
                     break;
                 }
@@ -40,5 +48,5 @@ fn solve_part2(lines: &[String]) -> String {
         }
     }
 
-    unreachable!();
+    println!("part 2: {}", result);
 }
