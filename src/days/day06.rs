@@ -26,7 +26,7 @@ fn solve_part2(input: &str) {
         .trim()
         .split("\n\n")
         .map(|group| {
-            let mut char_set = group
+            let char_set = group
                 .lines()
                 .next()
                 .unwrap()
