@@ -102,7 +102,7 @@ fn solve_part1(input: &str) {
 }
 
 fn solve_part2(input: &str) {
-    let mut computer = parse_computer(input);
+    let computer = parse_computer(input);
 
     for i in 0..computer.memory.len() {
         if computer.memory[i].operation == OP_NOP || computer.memory[i].operation == OP_JMP {
