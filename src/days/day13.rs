@@ -50,11 +50,9 @@ fn solve_part2(input: &str) -> usize {
 
     match chinese_remainder(&divisors, &remainders) {
         Some(solution) => {
-            println!("part 2: {}", solution);
             return solution as usize;
         }
         None => {
-            println!("invalid data? no chinese remainder found");
             return 0;
         }
     }
