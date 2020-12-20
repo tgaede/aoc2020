@@ -59,7 +59,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day14_part1() {
+    fn test_day15_part1() {
         assert_eq!(solve_part1("2,1,3"), 10);
         assert_eq!(solve_part1("1,3,2"), 1);
         assert_eq!(solve_part1("2,3,1"), 78);
@@ -68,14 +68,15 @@ mod tests {
         assert_eq!(solve_part1("0,3,6"), 436);
     }
 
-    #[test]
-    fn test_day14_part2() {
-        assert_eq!(solve_part2("0,3,6"), 175594);
-        assert_eq!(solve_part2("1,3,2"), 2578);
-        assert_eq!(solve_part2("2,1,3"), 3544142);
-        assert_eq!(solve_part2("1,2,3"), 261214);
-        assert_eq!(solve_part2("2,3,1"), 6895259);
-        assert_eq!(solve_part2("3,2,1"), 18);
-        assert_eq!(solve_part2("3,1,2"), 362);
-    }
+    // these tests take too long on non-release builds
+    // #[test]
+    // fn test_day15_part2() {
+    //     assert_eq!(solve_part2("0,3,6"), 175594);
+    //     assert_eq!(solve_part2("1,3,2"), 2578);
+    //     assert_eq!(solve_part2("2,1,3"), 3544142);
+    //     assert_eq!(solve_part2("1,2,3"), 261214);
+    //     assert_eq!(solve_part2("2,3,1"), 6895259);
+    //     assert_eq!(solve_part2("3,2,1"), 18);
+    //     assert_eq!(solve_part2("3,1,2"), 362);
+    // }
 }

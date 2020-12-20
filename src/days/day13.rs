@@ -93,43 +93,43 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_day12_part1() {
+    fn test_day13_part1() {
         let input: &str = "939\n7,13,x,x,59,x,31,19";
         assert_eq!(solve_part1(input), 295);
     }
 
     #[test]
-    fn test_day12_part2_test1() {
+    fn test_day13_part2_test1() {
         let input: &str = "939\n7,13,x,x,59,x,31,19";
         assert_eq!(solve_part2(input), 1068781);
     }
 
     #[test]
-    fn test_day12_part2_test2() {
+    fn test_day13_part2_test2() {
         let input: &str = "939\n17,x,13,19";
         assert_eq!(solve_part2(input), 3417);
     }
 
     #[test]
-    fn test_day12_part2_test3() {
+    fn test_day13_part2_test3() {
         let input: &str = "939\n67,7,59,61";
         assert_eq!(solve_part2(input), 754018);
     }
 
     #[test]
-    fn test_day12_part2_test4() {
+    fn test_day13_part2_test4() {
         let input: &str = "939\n67,x,7,59,61";
         assert_eq!(solve_part2(input), 779210);
     }
 
     #[test]
-    fn test_day12_part2_test5() {
+    fn test_day13_part2_test5() {
         let input: &str = "939\n67,7,x,59,61";
         assert_eq!(solve_part2(input), 1261476);
     }
 
     #[test]
-    fn test_day12_part2_test6() {
+    fn test_day13_part2_test6() {
         let input: &str = "939\n1789,37,47,1889";
         assert_eq!(solve_part2(input), 1202161486);
     }
